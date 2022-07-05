@@ -16,6 +16,14 @@
   font-weight: bold;
 }
 
+.cell:last-child {
+  border: none;
+}
+
+
+
+
+
 .cellRight {
   text-align: right;
 }
