@@ -1,14 +1,44 @@
-import React from "react";
+import React, {useEffect, useState, useLayoutEffect} from "react";
 import SingleApplication from "./SingleApplication";
 import { getSingleApplicationFixture } from "./__fixtures__/applications.fixture";
 import styles from "./Applications.module.css";
+import {Button} from "./ui/Button/Button";
 
 const Applications = () => {
-  const applications = getSingleApplicationFixture;
+
+  const [currentPage, setCurrentPage] = useState(0);
+  const [applications, setApplications] = useState([]);
+  const moreButtonHandlerClick = () => setCurrentPage(currentPage+1);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect( async () => {
+      setIsLoading(true);
+    const response = await fetch(`http://localhost:3001/api/applications?_page=${currentPage}&_limit=5`);
+    const data = await response.json();
+    setApplications([...applications, ...data]);
+      setIsLoading(false);
+  }, [currentPage]);
+
+  useLayoutEffect(() => {
+      window.scrollTo(0, document.body.scrollHeight + 100);
+  }, [applications, isLoading])
+
   return (
-    <div className={styles.Applications}>
-      <SingleApplication application={applications[0]} />
-    </div>
+    <>
+      <div className={styles.Applications}>
+        {applications.map(application =>
+          <SingleApplication application={application} />
+        )}
+      </div>
+      <div className={styles.ButtonContainer} >
+          {
+              isLoading
+                  ? <div className={styles.Loading} >Loading</div>
+                  : <Button onClick={moreButtonHandlerClick}>Load More</Button>
+          }
+
+      </div>
+    </>
   );
 };
 

@@ -3,3 +3,12 @@
   max-width: 1200px;
   margin: 0 auto;
 }
+
+.ButtonContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.Loading {
+  height: 44px;
+}
