@@ -4,16 +4,20 @@ import { getSingleApplicationFixture } from "./__fixtures__/applications.fixture
 import styles from "./Applications.module.css";
 import {Button} from "./ui/Button/Button";
 
+const NEXT_BATCH_QUERY_LIMIT = 5;
+
 const Applications = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [applications, setApplications] = useState([]);
-  const moreButtonHandlerClick = () => setCurrentPage(currentPage+1);
   const [isLoading, setIsLoading] = useState(false);
+  const moreButtonHandlerClick = () => setCurrentPage(currentPage+1);
 
   useEffect( async () => {
       setIsLoading(true);
-    const response = await fetch(`http://localhost:3001/api/applications?_page=${currentPage}&_limit=5`);
+    const response = await fetch(
+        `http://localhost:3001/api/applications?_page=${currentPage}&_limit=${NEXT_BATCH_QUERY_LIMIT}`
+    );
     const data = await response.json();
     setApplications([...applications, ...data]);
       setIsLoading(false);
@@ -21,7 +25,7 @@ const Applications = () => {
 
   useLayoutEffect(() => {
       window.scrollTo(0, document.body.scrollHeight);
-  }, [applications, isLoading])
+  }, [applications, isLoading]);
 
   return (
     <>
