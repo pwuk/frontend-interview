@@ -3,10 +3,10 @@ import styles from "./SingleApplication.module.css";
 import {dateFormat, moneyFormat} from "./utils";
 
 const SingleApplication = ({ application }) => (
-    <div key={application.id} className={styles.SingleApplication}>
+    <div className={styles.SingleApplication}>
       <div className={styles.cell}>
-        <sub>Company</sub>
-        {application.company}
+        <sub>Company {application.key}</sub>
+          {application.id} {application.company}
       </div>
       <div className={styles.cell}>
         <sub>Name</sub>

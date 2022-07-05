@@ -6,7 +6,7 @@ import {Button} from "./ui/Button/Button";
 
 const Applications = () => {
 
-  const [currentPage, setCurrentPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
   const [applications, setApplications] = useState([]);
   const moreButtonHandlerClick = () => setCurrentPage(currentPage+1);
   const [isLoading, setIsLoading] = useState(false);
@@ -20,14 +20,14 @@ const Applications = () => {
   }, [currentPage]);
 
   useLayoutEffect(() => {
-      window.scrollTo(0, document.body.scrollHeight + 100);
+      window.scrollTo(0, document.body.scrollHeight);
   }, [applications, isLoading])
 
   return (
     <>
       <div className={styles.Applications}>
         {applications.map(application =>
-          <SingleApplication application={application} />
+          <SingleApplication key={application.id} application={application} />
         )}
       </div>
       <div className={styles.ButtonContainer} >

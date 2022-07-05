@@ -4,6 +4,12 @@
   text-align: center;
 }
 
+.Sticky {
+  position: Sticky;
+  top: 0;
+  background-color: aliceblue;
+}
+
 .Header h1 {
   color: #143b6b;
   font-weight: 800;
