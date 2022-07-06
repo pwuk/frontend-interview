@@ -5,8 +5,8 @@ import {dateFormat, moneyFormat} from "./utils";
 const SingleApplication = ({ application }) => (
     <div className={styles.SingleApplication}>
       <div className={styles.cell}>
-        <sub>Company {application.key}</sub>
-          {application.id} {application.company}
+        <sub>Company</sub>
+        {application.company}
       </div>
       <div className={styles.cell}>
         <sub>Name</sub>
